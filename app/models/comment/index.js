@@ -11,8 +11,8 @@ exports.findAll = async () => {
     return rows;
 }
 
-exports.create = async (postData) => {
-    const [result] = await db.query(`INSERT INTO posts SET ?`, [postData]);
+exports.create = async (commentData) => {
+    const [result] = await db.query(`INSERT INTO comments SET ?`, [commentData]);
     return result.insertId;
 }
 
@@ -41,4 +41,9 @@ return result.affectedRows > 0 ;
 exports.reject = async (commentID) => {
 const [result] = await db.query('UPDATE comments SET status = ? WHERE id=? LIMIT 1',[commentStatus.REJECTED , commentID]);
 return result.affectedRows > 0 ;
+}
+
+exports.findByPostId = async (post_id , status = commentStatus.APPROVED) => {
+   const [result] = await db.query(`SELECT * FROM comments WHERE post_id = ? AND status = ? `,[post_id , status]);
+   return result;
 }

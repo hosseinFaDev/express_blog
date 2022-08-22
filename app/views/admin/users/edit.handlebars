@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="box-body">
-                <form action="/admin/users/update/{{user.id}}" method="POST">
+                <form action="/admin/users/update/{{correntUser.id}}" method="POST">
                     <div class="row mbn-20">
                         {{#if hasError}}
                         <div class="alert alert-outline-secondary" role="alert">
@@ -34,15 +34,15 @@
                         
                         <div class="col-12 mb-20">
                             <input name="full_name" type="text" id="formLayoutUsername3" class="form-control"
-                               value="{{user.full_name}}" placeholder="نام کامل کاربر" />
+                               value="{{correntUser.full_name}}" placeholder="نام کامل کاربر" />
                         </div>
                         <div class="col-12 mb-20">
                             <input name="email" type="email" id="formLayoutEmail3" class="form-control"
-                               value="{{user.email}}" placeholder="ایمیل کاربر" />
+                               value="{{correntUser.email}}" placeholder="ایمیل کاربر" />
                         </div>
                         <div class="col-12 mb-20">
                             <input name="password" type="password" id="formLayoutEmail3" class="form-control"
-                               value="{{user.password}}" placeholder="کلمه عبور" />
+                               value="{{correntUser.password}}" placeholder="کلمه عبور" />
                         </div>
 
 

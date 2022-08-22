@@ -106,7 +106,7 @@
                           <li>
                             <a href="#"><i class="zmdi zmdi-account"></i>پروفایل</a>
                           </li>
-                          
+
                         </ul>
                         <ul>
                           <li>
@@ -159,6 +159,9 @@
             </li>
             <li>
               <a href="/admin/settings"><i class="ti-settings"></i> <span>تنظیمات</span></a>
+            </li>
+            <li>
+              <a href="/" target="_blank"><i class="ti-eye"></i> <span>مشاهده بلاگ</span></a>
             </li>
           </ul>
         </nav>
@@ -217,6 +220,13 @@
   <script src="/static/assets/js/plugins/vmap/maps/jquery.vmap.world.js"></script>
   <script src="/static/assets/js/plugins/vmap/maps/samples/jquery.vmap.sampledata.js"></script>
   <script src="/static/assets/js/plugins/vmap/vmap.active.js"></script>
+  <script src="/static/assets/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({ selector: 'textarea',
+     plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+    toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+    
+    
+     });</script>
 </body>
 
 </html>

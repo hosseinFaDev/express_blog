@@ -4,11 +4,11 @@ const auth = require('../middlewares/auth');
 const guest = require('../middlewares/guest');
 const admin = require('../middlewares/admin');
 const authControllers = require('../controllers/auth/index');
-const homeRouter = require('./home');
+const front = require('./front');
 
 module.exports = (app) => {
 app.use('/admin',[auth,admin],adminRouter);
 app.use('/auth',[guest],authRouter);
 app.get('/loggout',authControllers.loggout)
-app.use('/',homeRouter);
+app.use('/',front);
 };

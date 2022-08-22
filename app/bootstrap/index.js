@@ -4,8 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 let RedisStore = require("connect-redis")(session);
-// const flash = require('connect-flash')
+
 
 module.exports = (app) => {
 
@@ -20,16 +21,24 @@ module.exports = (app) => {
     app.use(cookieParser());
     app.use(session({
         store: new RedisStore({ client: redisClient }),
-        secret: 'efrgtu5dergtg345ghhy435',
-        resave: true,
         saveUninitialized: true,
-        cookie: { maxAge: 60000 },
+        secret: 'efrgtu5dergtg345ghhy435',
+        cookie: { maxAge: 3600000 },
+        resave: true,
         unset :'destroy'
     }))
-    // app.use(flash())
+    //express file upload configes
+    app.use(fileUpload({
+        createParentPath : true,
+        useTempFiles:true 
+    }));
+
+    // handlebars configes
     app.engine('handlebars', engine());
     app.set('view engine', 'handlebars');
     app.set('views', path.join(__dirname, '../views'));
+
+    //static file configes
     app.use('/static', express.static(path.join(__dirname, '../../public')));
 
 }

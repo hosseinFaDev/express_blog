@@ -4,6 +4,8 @@ const langservices = require('../../services/languageServices');
 const usersModel = require('../../models/user');
 const postValidator = require('../../validators/post');
 const { statuses } = require('../../models/post/postStatus')
+const { v4: uuidv4 } = require('uuid');
+const path = require('path');
 
 exports.index = async (req, res) => {
     const posts = await postModel.findAll();
@@ -23,13 +25,21 @@ exports.create = async (req, res) => {
 
 exports.store = async (req, res) => {
     let hasError = false;
+
+    //change file name for upload
+    const fileName = uuidv4((req.files.thumbnail.name).split('.')[0]);
+    const fileExt = (req.files.thumbnail.name).split('.')[1];
+    const fullFileName = fileName + '.' + fileExt;
+
     const data = {
         title: req.body.title,
         slug: req.body.slug,
         content: req.body.content,
         status: req.body.status,
-        author_id: req.body.auther
+        author_id: req.body.auther,
+        thumbnail : fullFileName
     };
+    //Validator for input data
     const errors = postValidator.create(data);
     errors.length > 0 ? hasError = true : hasError = false;
 
@@ -41,6 +51,9 @@ exports.store = async (req, res) => {
     }
     const result = await postModel.create(data);
     if (result) {
+        //start upload files
+        const filePath = path.join((process.env.PWD),'public','upload','thumbnails',fullFileName);
+        const mv = req.files.thumbnail.mv(filePath);
         res.redirect('/admin/posts');
 
     }

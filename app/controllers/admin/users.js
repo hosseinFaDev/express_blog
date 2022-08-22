@@ -47,12 +47,11 @@ exports.edit = async (req, res) => {
     if (parseInt(userID) === 0) {
         return res.redirect('/admin/users');
     }
-    const user = await userModel.find(userID);
+    const correntUser = await userModel.find(userID);
     res.newRender('admin/users/edit', {
-        layout: 'admin', user, userRole: role.userRole, helpers: {
+        layout: 'admin', correntUser, userRole: role.userRole, helpers: {
             isSelectedRole: function (roleInput, options) {
-                console.log(roleInput)
-                return user.role === roleInput ? options.fn(this) : options.inverse(this);
+                return correntUser.role === roleInput ? options.fn(this) : options.inverse(this);
             }
         }
     });
